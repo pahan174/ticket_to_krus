@@ -8,6 +8,8 @@ un = os.getenv('PYTHON_USERNAME')
 pw = os.getenv('PYTHON_PASSWORD')
 cs = os.getenv('PYTHON_CONNECTSTRING')
 
+oracledb.init_oracle_client()
+
 with oracledb.connect(user=un, password=pw, dsn=cs) as connection:
     with connection.cursor() as cursor:
         sql = """select sysdate from dual"""
