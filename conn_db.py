@@ -13,6 +13,7 @@ oracledb.init_oracle_client()
 
 with oracledb.connect(user=un, password=pw, dsn=cs) as connection:
     with connection.cursor() as cursor:
+        result = cursor.var(str)
         req = '''
         BEGIN
         :result := tt.uni_bss.find_device_for_zabbix(p_deveui => :p_deveui,
@@ -21,8 +22,9 @@ with oracledb.connect(user=un, password=pw, dsn=cs) as connection:
         end;
         '''
         # sql = """select sysdate from dual"""
-        res = cursor.execute(req, {
+        cursor.execute(req, {
                 'p_deveui': deveui,
                 'p_tt_trouble': 'Проверка',
+                'result': result
             })
-        print(res)
+        print(result.getvalue())
