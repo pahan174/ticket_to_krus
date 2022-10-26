@@ -32,7 +32,7 @@ with oracledb.connect(user=un, password=pw, dsn=cs) as connection:
         except Exception as e:
             print(f'Ошибка {e}')
         else:
-            if 'no data found' in result:
+            if result == 'no data found':
                 print('Такого DEVEUI нет в КРУС')
             else:
                 print(f'ОТкрыт тикет {result}')
