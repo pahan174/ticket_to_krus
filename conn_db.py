@@ -15,11 +15,15 @@ with oracledb.connect(user=un, password=pw, dsn=cs) as connection:
     with connection.cursor() as cursor:
         req = '''
         BEGIN
-        :result := tt.uni_bss.find_device_for_zabbix(p_deveui => '5CA05DEF6B070B04',
-        p_tt_trouble => 'Проверка');
+        :result := tt.uni_bss.find_device_for_zabbix(p_deveui => :p_deveui,
+        p_tt_trouble => :p_tt_trouble);
         commit;
         end;
         '''
         # sql = """select sysdate from dual"""
-        for r in cursor.execute(req):
+        for r in cursor.execute(req, {
+                'p_deveui': deveui,
+                'p_tt_trouble': 'Проверка',
+                 'result': {dir: oracledb.BIND_OUT, type: oracledb.STRING, maxSize: 40},
+            }):
             print(r)
