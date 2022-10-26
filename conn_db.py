@@ -24,6 +24,5 @@ with oracledb.connect(user=un, password=pw, dsn=cs) as connection:
         res = cursor.execute(req, {
                 'p_deveui': deveui,
                 'p_tt_trouble': 'Проверка',
-                'result': 'result'
             })
         print(res)
