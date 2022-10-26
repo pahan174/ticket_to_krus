@@ -7,7 +7,8 @@ load_dotenv()
 un = os.getenv('PYTHON_USERNAME')
 pw = os.getenv('PYTHON_PASSWORD')
 cs = os.getenv('PYTHON_CONNECTSTRING')
-deveui='5CA05DEF6B070B041'
+deveui='5CA05DEF6B070B04'
+text = 'Нет пакетов трое суток'
 
 oracledb.init_oracle_client()
 
@@ -22,9 +23,17 @@ with oracledb.connect(user=un, password=pw, dsn=cs) as connection:
         end;
         '''
         # sql = """select sysdate from dual"""
-        cursor.execute(req, {
-                'p_deveui': deveui,
-                'p_tt_trouble': 'Проверка',
-                'result': result
-            })
-        print(result.getvalue())
+        try:
+            cursor.execute(req, {
+                    'p_deveui': deveui,
+                    'p_tt_trouble': deveui + ' ' + text,
+                    'result': result,
+                })
+        except Exception as e:
+            print(f'Ошибка {e}')
+        else:
+            if 'no data found' in result:
+                print('Такого DEVEUI нет в КРУС')
+            else:
+                print(f'ОТкрыт тикет {result}')
+
