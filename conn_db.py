@@ -1,14 +1,22 @@
 import os
 import oracledb
 from dotenv import load_dotenv
+import sys
+
+
 
 load_dotenv()
 
 un = os.getenv('PYTHON_USERNAME')
 pw = os.getenv('PYTHON_PASSWORD')
 cs = os.getenv('PYTHON_CONNECTSTRING')
-deveui = '5CA05DEF6B070B042'
-text = 'Нет пакетов трое суток'
+deveui = sys.argv[1]
+text = sys.argv[2]
+eventid = sys.argv[3]
+
+print(deveui)
+print(text)
+print(eventid)
 
 oracledb.init_oracle_client()
 try:
@@ -31,7 +39,7 @@ try:
 except Exception as e:
     print(f'Ошибка {e}')
 else:
-    if result.getvalue() == 'no data found':
+    if 'no data found' in result.getvalue():
         print('Такого DEVEUI нет в КРУС')
     else:
         print(f'ОТкрыт тикет {result.getvalue()}')
