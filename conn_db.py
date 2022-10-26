@@ -21,10 +21,9 @@ with oracledb.connect(user=un, password=pw, dsn=cs) as connection:
         end;
         '''
         # sql = """select sysdate from dual"""
-        for r in cursor.execute(req, {
+        res = cursor.execute(req, {
                 'p_deveui': deveui,
                 'p_tt_trouble': 'Проверка',
                 'result': 'result'
-            }):
-            print(r)
-            print()
+            }
+            print(res)
