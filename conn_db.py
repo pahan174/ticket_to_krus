@@ -22,13 +22,12 @@ try:
             commit;
             end;
             '''
-        # sql = """select sysdate from dual"""
 
-        cursor.execute(req, {
-                'p_deveui': deveui,
-                'p_tt_trouble': deveui + ' ' + text,
-                'result': result,
-            })
+            cursor.execute(req, {
+                    'p_deveui': deveui,
+                    'p_tt_trouble': deveui + ' ' + text,
+                    'result': result,
+                })
 except Exception as e:
     print(f'Ошибка {e}')
 else:
@@ -36,4 +35,3 @@ else:
         print('Такого DEVEUI нет в КРУС')
     else:
         print(f'ОТкрыт тикет {result.getvalue()}')
-
