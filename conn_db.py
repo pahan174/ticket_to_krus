@@ -25,5 +25,5 @@ with oracledb.connect(user=un, password=pw, dsn=cs) as connection:
                 'p_deveui': deveui,
                 'p_tt_trouble': 'Проверка',
                 'result': 'result'
-            }
-            print(res)
+            })
+        print(res)
