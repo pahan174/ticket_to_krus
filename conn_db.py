@@ -7,7 +7,7 @@ load_dotenv()
 un = os.getenv('PYTHON_USERNAME')
 pw = os.getenv('PYTHON_PASSWORD')
 cs = os.getenv('PYTHON_CONNECTSTRING')
-deveui='5CA05DEF6B070B04'
+deveui='5CA05DEF6B070B041'
 
 oracledb.init_oracle_client()
 
