@@ -24,6 +24,7 @@ with oracledb.connect(user=un, password=pw, dsn=cs) as connection:
         for r in cursor.execute(req, {
                 'p_deveui': deveui,
                 'p_tt_trouble': 'Проверка',
-                'result': {'type': oracledb.LONG_STRING},
+                'result': 'result'
             }):
             print(r)
+            print()
